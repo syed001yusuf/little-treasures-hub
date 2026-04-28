@@ -1,0 +1,4 @@
+id,title,subtitle,cta_text,cta_link,image_url,bg_color,active
+bnr-1,Soft Sleep Essentials,Cozy beds and calming layers for peaceful naps,Shop New Arrivals,/products,https://loremflickr.com/1600/900/baby-nursery?lock=21,#FCE7F3,TRUE
+bnr-2,Everyday Baby Comfort,Thoughtful clothing and accessories for daily care,Explore Best Sellers,/products?sort=featured,https://loremflickr.com/1600/900/baby-clothes?lock=22,#E0F2FE,TRUE
+bnr-3,Gifts Made Lovely,Beautiful baby hampers and keepsake bundles,See Gift Sets,/category/gift-items,https://loremflickr.com/1600/900/baby-gift?lock=23,#FFF1D6,TRUE

@@ -10,10 +10,10 @@ export function USPStrip() {
     <section className="container py-8">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {usps.map(u => (
-          <div key={u.title} className="bg-card rounded-2xl border-t-4 border-t-primary p-5 text-center shadow-sm">
-            <span className="text-3xl">{u.emoji}</span>
-            <h3 className="font-heading font-bold mt-2">{u.title}</h3>
-            <p className="text-sm text-muted-foreground mt-1">{u.desc}</p>
+          <div key={u.title} className="bg-card rounded-2xl border-t-4 border-t-primary p-3 sm:p-5 text-center shadow-sm">
+            <span className="text-2xl sm:text-3xl">{u.emoji}</span>
+            <h3 className="font-heading font-bold text-xs sm:text-sm mt-1.5 sm:mt-2">{u.title}</h3>
+            <p className="text-[10px] sm:text-sm text-muted-foreground mt-0.5 sm:mt-1 hidden sm:block">{u.desc}</p>
           </div>
         ))}
       </div>

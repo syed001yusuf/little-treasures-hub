@@ -124,7 +124,7 @@ export default function ProductsPage({ prefilterCategory }: { prefilterCategory?
 
       {/* Category Hero */}
       {category && (
-        <div className="py-10 text-center" style={{ backgroundColor: category.color }}>
+        <div className="py-4 text-center" style={{ backgroundColor: category.color }}>
           <span className="text-5xl">{category.emoji}</span>
           <h1 className="font-heading text-3xl font-bold mt-2">{category.name}</h1>
           <p className="text-muted-foreground mt-1">{category.description}</p>
@@ -174,7 +174,7 @@ export default function ProductsPage({ prefilterCategory }: { prefilterCategory?
                 <Button onClick={clearFilters} className="mt-4 rounded-xl">Clear Filters</Button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4">
                 {filtered.map(p => <ProductCard key={p.id} product={p} />)}
               </div>
             )}

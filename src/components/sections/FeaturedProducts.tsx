@@ -12,7 +12,7 @@ export function FeaturedProducts() {
     <section className="container py-12">
       <h2 className="font-heading text-2xl sm:text-3xl font-bold text-center mb-2">Featured Products</h2>
       <div className="w-16 h-1 bg-primary rounded-full mx-auto mb-8" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {featured.map(p => <ProductCard key={p.id} product={p} />)}
       </div>
       <div className="text-center mt-6">
@@ -33,7 +33,7 @@ export function NewArrivals() {
       <div className="container">
         <h2 className="font-heading text-2xl sm:text-3xl font-bold text-center mb-2">New Arrivals 🆕</h2>
         <div className="w-16 h-1 bg-primary rounded-full mx-auto mb-8" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {arrivals.map(p => <ProductCard key={p.id} product={p} />)}
         </div>
       </div>

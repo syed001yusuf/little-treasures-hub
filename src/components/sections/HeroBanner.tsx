@@ -12,13 +12,13 @@ export function HeroBanner() {
         <svg className="absolute bottom-32 right-1/3 w-14 h-14 text-primary/8 animate-float" style={{ animationDelay: '0.5s' }} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
       </div>
 
-      <div className="container relative z-10 flex flex-col lg:flex-row items-center min-h-[60vh] lg:min-h-[85vh] py-12 lg:py-0 gap-8">
+      <div className="container relative z-10 flex flex-col lg:flex-row items-center min-h-[50vh] sm:min-h-[60vh] lg:min-h-[85vh] py-8 sm:py-12 lg:py-0 gap-6 sm:gap-8">
         {/* Left content */}
         <div className="flex-1 space-y-6 text-center lg:text-left">
           <span className="inline-block bg-accent/20 text-accent-foreground text-sm font-medium px-4 py-1.5 rounded-full">
             🌟 Mysore's Favourite Baby Store
           </span>
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-tight">
             Everything Your<br />Baby Needs
           </h1>
           <p className="text-lg text-muted-foreground max-w-md mx-auto lg:mx-0">
@@ -42,8 +42,8 @@ export function HeroBanner() {
           </div>
         </div>
 
-        {/* Right illustration */}
-        <div className="flex-1 flex items-center justify-center">
+        {/* Right illustration — hidden on very small screens for better mobile UX */}
+        <div className="hidden sm:flex flex-1 items-center justify-center">
           <svg viewBox="0 0 400 400" className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
             {/* Baby */}
             <circle cx="200" cy="160" r="60" fill="hsl(var(--primary-light))" />

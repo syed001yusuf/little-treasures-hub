@@ -17,9 +17,15 @@ const navLinks = [
 export function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [catOpen, setCatOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { totalItems } = useCart();
   const { data: categories = [] } = useCategories();
   const location = useLocation();
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 10);
@@ -83,8 +89,8 @@ export function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
             )}
           </Link>
 
-          {/* Mobile Menu */}
-          <Sheet>
+          {/* Mobile Menu — controlled state closes on navigation */}
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild className="md:hidden">
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Menu className="h-5 w-5" />

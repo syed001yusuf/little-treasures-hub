@@ -16,7 +16,7 @@ export function ProductCard({ product }: { product: Product }) {
       {/* Image */}
       <Link to={`/products/${product.id}`} className="block relative aspect-square bg-muted overflow-hidden">
         {product.image_url ? (
-          <img src={product.image_url} alt={product.name} className="w-full h-full object-contain p-4" loading="lazy" />
+          <img src={product.image_url} alt={product.name} className="w-full h-full object-contain" loading="lazy" />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-5xl">🧸</div>
         )}
@@ -44,24 +44,24 @@ export function ProductCard({ product }: { product: Product }) {
       )}
 
       {/* Info */}
-      <div className="p-3 space-y-1.5">
+      <div className="p-2 sm:p-3 space-y-1 sm:space-y-1.5">
         <Link to={`/products/${product.id}`}>
-          <h3 className="font-heading font-semibold text-sm line-clamp-2 hover:text-primary transition-colors">{product.name}</h3>
+          <h3 className="font-heading font-semibold text-xs sm:text-sm line-clamp-2 hover:text-primary transition-colors">{product.name}</h3>
         </Link>
-        <p className="text-xs text-muted-foreground">{product.age_range}</p>
-        <p className="text-xs text-muted-foreground">{product.brand}</p>
-        <div className="flex items-center gap-1.5">
+        <p className="text-[10px] sm:text-xs text-muted-foreground">{product.age_range}</p>
+        <p className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{product.brand}</p>
+        <div className="hidden sm:flex items-center gap-1.5">
           <StarRating rating={product.rating} size={12} />
           <span className="text-xs text-muted-foreground">({product.review_count})</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-primary font-bold">₹{product.price.toLocaleString('en-IN')}</span>
+        <div className="flex items-center gap-1 sm:gap-2 flex-wrap">
+          <span className="text-primary font-bold text-sm sm:text-base">₹{product.price.toLocaleString('en-IN')}</span>
           {product.mrp > product.price && (
-            <span className="text-xs text-muted-foreground line-through">₹{product.mrp.toLocaleString('en-IN')}</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground line-through">₹{product.mrp.toLocaleString('en-IN')}</span>
           )}
         </div>
         <Button
-          className="w-full mt-1 rounded-xl"
+          className="w-full mt-1 rounded-xl text-xs sm:text-sm"
           size="sm"
           disabled={!product.in_stock}
           onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image_url: product.image_url, unit: product.unit })}

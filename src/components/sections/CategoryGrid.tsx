@@ -13,11 +13,11 @@ export function CategoryGrid() {
           <Link
             key={cat.slug}
             to={`/category/${cat.slug}`}
-            className="group flex flex-col items-center gap-2 p-6 rounded-2xl transition-all hover:scale-105 hover:ring-2 hover:ring-primary hover:shadow-md"
+            className="group flex flex-col items-center gap-1.5 p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 hover:ring-2 hover:ring-primary hover:shadow-md"
             style={{ backgroundColor: cat.color }}
           >
-            <span className="text-4xl group-hover:scale-110 transition-transform">{cat.emoji}</span>
-            <span className="font-heading font-bold text-sm text-center text-foreground">{cat.name}</span>
+            <span className="text-3xl sm:text-4xl group-hover:scale-110 transition-transform">{cat.emoji}</span>
+            <span className="font-heading font-bold text-xs sm:text-sm text-center text-foreground">{cat.name}</span>
           </Link>
         ))}
       </div>
