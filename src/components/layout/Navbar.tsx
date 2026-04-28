@@ -37,7 +37,7 @@ export function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
 
   return (
     <header className={`sticky top-0 z-50 w-full transition-shadow ${scrolled ? 'shadow-md bg-card/95 backdrop-blur-sm' : 'bg-card'}`}>
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-14 sm:h-16 items-center justify-between gap-2">
         <Logo />
 
         {/* Desktop Nav */}
@@ -74,16 +74,16 @@ export function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
         </nav>
 
         {/* Right Actions */}
-        <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={onSearchOpen} className="rounded-full">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <Button variant="ghost" size="icon" onClick={onSearchOpen} aria-label="Search" className="rounded-full h-11 w-11 sm:h-10 sm:w-10">
             <Search className="h-5 w-5" />
           </Button>
-          <Link to="/cart" className="relative">
-            <Button variant="ghost" size="icon" className="rounded-full">
+          <Link to="/cart" className="relative" aria-label="Cart">
+            <Button variant="ghost" size="icon" className="rounded-full h-11 w-11 sm:h-10 sm:w-10">
               <ShoppingCart className="h-5 w-5" />
             </Button>
             {totalItems > 0 && (
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              <span className="absolute -top-0.5 -right-0.5 bg-primary text-primary-foreground text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center pointer-events-none">
                 {totalItems}
               </span>
             )}
@@ -92,21 +92,21 @@ export function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
           {/* Mobile Menu — controlled state closes on navigation */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="rounded-full">
+              <Button variant="ghost" size="icon" aria-label="Open menu" className="rounded-full h-11 w-11">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-72 p-0">
+            <SheetContent side="left" className="w-[85vw] max-w-xs p-0">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="p-6">
                 <Logo />
               </div>
-              <nav className="flex flex-col px-4 pb-6 gap-1">
+              <nav className="flex flex-col px-4 pb-6 gap-1 overflow-y-auto max-h-[calc(100vh-100px)]">
                 {navLinks.map(link => (
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`px-4 py-3 rounded-xl text-sm font-medium transition-colors hover:bg-primary-light ${isActive(link.to) ? 'bg-primary-light text-primary' : ''}`}
+                    className={`px-4 py-3 min-h-[44px] flex items-center rounded-xl text-sm font-medium transition-colors hover:bg-primary-light ${isActive(link.to) ? 'bg-primary-light text-primary' : ''}`}
                   >
                     {link.label}
                   </Link>
@@ -116,7 +116,7 @@ export function Navbar({ onSearchOpen }: { onSearchOpen: () => void }) {
                   <Link
                     key={cat.slug}
                     to={`/category/${cat.slug}`}
-                    className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm hover:bg-primary-light transition-colors"
+                    className="flex items-center gap-2 px-4 py-3 min-h-[44px] rounded-xl text-sm hover:bg-primary-light transition-colors"
                   >
                     <span>{cat.emoji}</span> {cat.name}
                   </Link>

@@ -13,7 +13,7 @@ export function Logo() {
         <path d="M6 32 L42 32" stroke="hsl(var(--primary))" strokeWidth="2.5" strokeLinecap="round" />
       </svg>
       <div className="flex flex-col leading-tight">
-        <span className="font-heading text-lg font-bold text-primary">SELECT BABY WORLD</span>
+        <span className="font-heading text-md font-bold text-primary">SELECT BABY WORLD</span>
         <span className="text-[10px] text-muted-foreground tracking-wide">Gandhi Square, Mysore</span>
       </div>
     </Link>

@@ -134,7 +134,7 @@ export default function ProductsPage({ prefilterCategory }: { prefilterCategory?
         </div>
       )}
 
-      <div className="container py-8">
+      <div className="container px-4 py-4">
         {!category && <h1 className="font-heading text-3xl font-bold mb-6">All Products</h1>}
 
         <div className="flex gap-8">
