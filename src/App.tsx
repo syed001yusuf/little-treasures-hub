@@ -20,6 +20,7 @@ const CartPage = lazy(() => import('./pages/Cart'));
 const AboutPage = lazy(() => import('./pages/About'));
 const ContactPage = lazy(() => import('./pages/Contact'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,9 +50,44 @@ function PageFallback() {
   );
 }
 
-const App = () => {
+/**
+ * Storefront chrome (Navbar / Footer / FloatingWhatsApp / SearchModal)
+ * is hidden on /admin routes so the admin panel renders full-screen
+ * with its own layout. We split the routed UI into its own component
+ * so we can inspect the current pathname via `useLocation`.
+ */
+function AppRoutes() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith('/admin');
 
+  return (
+    <>
+      <ScrollToTop />
+      {!isAdmin && <Navbar onSearchOpen={() => setSearchOpen(true)} />}
+      {!isAdmin && <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />}
+      <main className={isAdmin ? '' : 'min-h-screen'}>
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetail />} />
+            <Route path="/category/:slug" element={<CategoryPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin/*" element={<Admin />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      {!isAdmin && <Footer />}
+      {!isAdmin && <FloatingWhatsApp />}
+    </>
+  );
+}
+
+const App = () => {
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -60,25 +96,7 @@ const App = () => {
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <ScrollToTop />
-              <Navbar onSearchOpen={() => setSearchOpen(true)} />
-              <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
-              <main className="min-h-screen">
-                <Suspense fallback={<PageFallback />}>
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/products" element={<Products />} />
-                    <Route path="/products/:id" element={<ProductDetail />} />
-                    <Route path="/category/:slug" element={<CategoryPage />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/contact" element={<ContactPage />} />
-                    <Route path="*" element={<NotFound />} />
-                  </Routes>
-                </Suspense>
-              </main>
-              <Footer />
-              <FloatingWhatsApp />
+              <AppRoutes />
             </BrowserRouter>
           </TooltipProvider>
         </CartProvider>

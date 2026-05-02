@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { HeroBanner } from '@/components/sections/HeroBanner';
 import { USPStrip } from '@/components/sections/USPStrip';
 import { CategoryGrid } from '@/components/sections/CategoryGrid';
-import { FeaturedProducts, NewArrivals } from '@/components/sections/FeaturedProducts';
+import { FeaturedProducts, NewArrivals, CrazyDeals } from '@/components/sections/FeaturedProducts';
 import { WhyChooseUs } from '@/components/sections/WhyChooseUs';
 import { GoogleReviews } from '@/components/sections/GoogleReviews';
 import { StoreLocation } from '@/components/sections/StoreLocation';
@@ -29,6 +29,7 @@ export default function HomePage() {
       </Helmet>
       <HeroBanner />
       <USPStrip />
+      <CrazyDeals />
       <CategoryGrid />
       <FeaturedProducts />
       <NewArrivals />
