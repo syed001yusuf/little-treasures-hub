@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Heart } from 'lucide-react';
-import { memo, useCallback, useState } from 'react';
+import { ShoppingCart } from 'lucide-react';
+import { memo, useCallback } from 'react';
 import { StarRating } from './StarRating';
 import { Button } from './button';
 import { useCart } from '@/lib/cart-context';
 import type { Product } from '@/lib/types';
 
 function ProductCardComponent({ product }: { product: Product }) {
-  const [liked, setLiked] = useState(false);
   const { addItem } = useCart();
   const discount = product.mrp > product.price ? Math.round(((product.mrp - product.price) / product.mrp) * 100) : 0;
   const isCrazyDeal = product.category_slug === 'crazy-deals';
@@ -15,8 +14,6 @@ function ProductCardComponent({ product }: { product: Product }) {
   const handleAdd = useCallback(() => {
     addItem({ id: product.id, name: product.name, price: product.price, image_url: product.image_url, unit: product.unit });
   }, [addItem, product.id, product.name, product.price, product.image_url, product.unit]);
-
-  const toggleLike = useCallback(() => setLiked(prev => !prev), []);
 
   return (
     <div className="group relative bg-card rounded-2xl border shadow-sm hover:shadow-md transition-all overflow-hidden">
@@ -43,24 +40,13 @@ function ProductCardComponent({ product }: { product: Product }) {
       </Link>
 
       {/* Badges */}
-      {isCrazyDeal ? (
+      {isCrazyDeal && (
         <span className="absolute top-2 left-2 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow animate-pulse">
           🔥 Crazy Deal
         </span>
-      ) : (
-        <span className="absolute top-2 left-2 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full">
-          {product.category_slug.replace(/-/g, ' ')}
-        </span>
       )}
-      <button
-        onClick={toggleLike}
-        aria-label={liked ? 'Unlike product' : 'Like product'}
-        className="absolute top-2 right-2 h-9 w-9 sm:h-8 sm:w-8 rounded-full bg-card/80 backdrop-blur flex items-center justify-center"
-      >
-        <Heart className={`h-4 w-4 ${liked ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
-      </button>
       {discount > 5 && (
-        <span className={`absolute top-11 right-2 text-[10px] font-bold px-2 py-0.5 rounded-full ${isCrazyDeal ? 'bg-red-600 text-white' : 'bg-accent text-accent-foreground'}`}>
+        <span className={`absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded-full ${isCrazyDeal ? 'bg-red-600 text-white' : 'bg-accent text-accent-foreground'}`}>
           {discount}% OFF
         </span>
       )}

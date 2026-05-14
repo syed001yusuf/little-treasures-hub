@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from '@/components/ui/select';
 
 const AGE_RANGES = ['0-6 months', '6-12 months', '1-2 years', '2-4 years'];
 const SORT_OPTIONS = [
@@ -19,12 +22,11 @@ const SORT_OPTIONS = [
 function FilterPanel({
   categories, selectedCats, toggleCat,
   selectedAges, toggleAge,
-  sort, setSort, query, setQuery, onClear, filterCount
+  query, setQuery, onClear, filterCount,
 }: {
   categories: { slug: string; name: string; emoji: string }[];
   selectedCats: string[]; toggleCat: (s: string) => void;
   selectedAges: string[]; toggleAge: (s: string) => void;
-  sort: string; setSort: (s: string) => void;
   query: string; setQuery: (s: string) => void;
   onClear: () => void; filterCount: number;
 }) {
@@ -33,6 +35,11 @@ function FilterPanel({
       <div>
         <label className="text-sm font-semibold">Search</label>
         <Input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search products..." className="mt-1 rounded-xl" />
+      </div>
+      <div>
+        <label className="text-sm font-bold">
+          <Link to="/category/crazy-deals">🔥 Crazy Deals</Link>
+        </label>
       </div>
       <div>
         <label className="text-sm font-semibold">Category</label>
@@ -56,20 +63,6 @@ function FilterPanel({
           ))}
         </div>
       </div>
-      <div>
-        <label className="text-sm font-semibold">Sort</label>
-        <div className="mt-2 space-y-1">
-          {SORT_OPTIONS.map(o => (
-            <button
-              key={o.value}
-              onClick={() => setSort(o.value)}
-              className={`block w-full text-left px-3 py-1.5 rounded-lg text-sm transition-colors ${sort === o.value ? 'bg-primary-light text-primary font-medium' : 'hover:bg-muted'}`}
-            >
-              {o.label}
-            </button>
-          ))}
-        </div>
-      </div>
       {filterCount > 0 && (
         <Button variant="outline" onClick={onClear} className="w-full rounded-xl">
           <X className="h-4 w-4 mr-1" /> Clear Filters
@@ -82,7 +75,7 @@ function FilterPanel({
 export default function ProductsPage({ prefilterCategory }: { prefilterCategory?: string }) {
   const { data: products = [] } = useProducts();
   const { data: categories = [] } = useCategories();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const [query, setQuery] = useState(searchParams.get('q') || '');
   const [selectedCats, setSelectedCats] = useState<string[]>(
@@ -111,7 +104,7 @@ export default function ProductsPage({ prefilterCategory }: { prefilterCategory?
     return result;
   }, [products, query, selectedCats, selectedAges, sort]);
 
-  const filterProps = { categories, selectedCats, toggleCat, selectedAges, toggleAge, sort, setSort, query, setQuery, onClear: clearFilters, filterCount };
+  const filterProps = { categories, selectedCats, toggleCat, selectedAges, toggleAge, query, setQuery, onClear: clearFilters, filterCount };
 
   const category = prefilterCategory ? categories.find(c => c.slug === prefilterCategory) : null;
 
@@ -135,8 +128,6 @@ export default function ProductsPage({ prefilterCategory }: { prefilterCategory?
       )}
 
       <div className="container px-4 py-4">
-        {!category && <h1 className="font-heading text-3xl font-bold mb-6">All Products</h1>}
-
         <div className="flex gap-8">
           {/* Desktop Sidebar */}
           <aside className="hidden lg:block w-64 shrink-0">
@@ -146,24 +137,49 @@ export default function ProductsPage({ prefilterCategory }: { prefilterCategory?
           </aside>
 
           {/* Main */}
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-4">
-              <p className="text-sm text-muted-foreground">{filtered.length} products</p>
-              {/* Mobile filter */}
-              <Sheet>
-                <SheetTrigger asChild className="lg:hidden">
-                  <Button variant="outline" size="sm" className="rounded-xl">
-                    <Filter className="h-4 w-4 mr-1" /> Filters
-                    {filterCount > 0 && <span className="ml-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">{filterCount}</span>}
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="bottom" className="rounded-t-2xl max-h-[80vh] overflow-y-auto">
-                  <SheetTitle>Filters</SheetTitle>
-                  <div className="p-4">
-                    <FilterPanel {...filterProps} />
-                  </div>
-                </SheetContent>
-              </Sheet>
+          <div className="flex-1 min-w-0">
+            {/* Header: heading + count on the left, filters/sort on the right */}
+            <div className="flex flex-wrap items-end gap-3 mb-4">
+              <div className="flex-1 min-w-[140px]">
+                {!category && (
+                  <h1 className="font-heading text-2xl sm:text-3xl font-bold leading-tight">All Products</h1>
+                )}
+                <p className="text-sm text-muted-foreground mt-0.5">{filtered.length} products</p>
+              </div>
+
+              <div className="flex items-center gap-2 ml-auto">
+                {/* Mobile filter trigger */}
+                <Sheet>
+                  <SheetTrigger asChild className="lg:hidden">
+                    <Button variant="outline" size="sm" className="rounded-xl h-9">
+                      <Filter className="h-4 w-4 mr-1" /> Filters
+                      {filterCount > 0 && (
+                        <span className="ml-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                          {filterCount}
+                        </span>
+                      )}
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="bottom" className="rounded-t-2xl max-h-[80vh] overflow-y-auto">
+                    <SheetTitle>Filters</SheetTitle>
+                    <div className="p-4">
+                      <FilterPanel {...filterProps} />
+                    </div>
+                  </SheetContent>
+                </Sheet>
+
+                <span className="hidden sm:inline text-sm text-muted-foreground">Sort by</span>
+                <Select value={sort} onValueChange={setSort}>
+                  <SelectTrigger className="w-[150px] sm:w-[170px] rounded-xl h-9" aria-label="Sort products">
+                    <SelectValue placeholder="Sort" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SORT_OPTIONS.map(o => (
+                      <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
             {filtered.length === 0 ? (

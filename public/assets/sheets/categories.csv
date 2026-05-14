@@ -1,10 +1,10 @@
-id,name,slug,emoji,description,color,banner_image_url,sort_order
-cat-1,New Arrivals,new-arrivals,✨,Fresh picks for little ones,#FDE2E4,https://loremflickr.com/1200/600/baby-newborn?lock=11,1
-cat-2,Carry Net Beds,carry-net-beds,🛏️,Breathable sleep solutions for travel and home,#E0F7FA,https://loremflickr.com/1200/600/baby-bed?lock=12,2
-cat-3,Cradles Bedding,cradles-bedding,🌙,Gentle cradle and bedding essentials,#FFF1D6,https://loremflickr.com/1200/600/baby-cradle?lock=13,3
-cat-4,Baby Clothing,baby-clothing,👕,Soft everyday clothing for newborns and infants,#FDEBD0,https://loremflickr.com/1200/600/baby-clothes?lock=14,4
-cat-5,Footwear,footwear,👣,Comfy first steps and soft sole styles,#E8F5E9,https://loremflickr.com/1200/600/baby-shoes?lock=15,5
-cat-6,Baby Accessories,baby-accessories,🧸,Practical care and feeding accessories,#F3E5F5,https://loremflickr.com/1200/600/baby-accessories?lock=16,6
-cat-7,Gift Items,gift-items,🎁,Ready to gift sets for newborn celebrations,#FFE4EC,https://loremflickr.com/1200/600/baby-gift?lock=17,7
-cat-8,Carry Cots,carry-cots,🍼,Portable carry cots for safe movement,#E3F2FD,https://loremflickr.com/1200/600/baby-cot?lock=18,8
+id,name,slug,emoji,description,color,banner_image_url,sort_order,,,,,,,
+cat-1,New-Arrivals,new-arrivals,✨,Fresh picks for little ones,#FDE2E4,https://loremflickr.com/1200/600/baby-newborn?lock=11,1,,,,,,,
+cat-2,Carry Net Beds,carry-net-beds,🛏️,Breathable sleep solutions for travel and home,#E0F7FA,https://loremflickr.com/1200/600/baby-bed?lock=12,2,,,,,,,
+cat-3,Cradles Bedding,cradles-bedding,🌙,Gentle cradle and bedding essentials,#FFF1D6,https://loremflickr.com/1200/600/baby-cradle?lock=13,3,,,,,,,
+cat-4,Baby Clothing,baby-clothing,👕,Soft everyday clothing for newborns and infants,#FDEBD0,https://loremflickr.com/1200/600/baby-clothes?lock=14,4,,,,,,,
+cat-5,Footwear,footwear,👣,Comfy first steps and soft sole styles,#E8F5E9,https://loremflickr.com/1200/600/baby-shoes?lock=15,5,,,,,,,
+cat-6,Baby Accessories,baby-accessories,🧸,Practical care and feeding accessories,#F3E5F5,https://loremflickr.com/1200/600/baby-accessories?lock=16,6,,,,,,,
+cat-7,Gift Items,gift-items,🎁,Ready to gift sets for newborn celebrations,#FFE4EC,https://loremflickr.com/1200/600/baby-gift?lock=17,7,,,,,,,
+cat-8,Carry Cots,carry-cots,🍼,Portable carry cots for safe movement,#E3F2FD,https://loremflickr.com/1200/600/baby-cot?lock=18,8,,,,,,,
 cat-9,Caps Gloves,caps-gloves,🧤,Warm caps and mittens for tiny hands,#FFF0F5,https://loremflickr.com/1200/600/baby-mittens?lock=19,9cat-0,Crazy Deals,crazy-deals,??,Daily deals at 50%-70% off,#FFEBEE,https://loremflickr.com/1200/600/baby-sale?lock=10,0
